@@ -34,11 +34,7 @@ const postAdScheme = yup.object().shape({
 const PostAd = ({ edit = false, id }: { edit?: boolean; id?: string }) => {
   const navigate = useNavigate();
 
-  const {
-    data: productDetailData,
-    isLoading,
-    error: fetchError,
-  } = useQuery({
+  const { data: productDetailData, isLoading } = useQuery({
     queryKey: ["productDetailKey", id],
     queryFn: () => getSingleAdvertisementsDetails(id),
     enabled: edit && !!id,
@@ -58,14 +54,6 @@ const PostAd = ({ edit = false, id }: { edit?: boolean; id?: string }) => {
     return (
       <div className="flex justify-center items-center h-screen">
         <Spinner />
-      </div>
-    );
-  }
-
-  if (edit && fetchError) {
-    return (
-      <div className="text-center text-red-500 p-4">
-        Error loading advertisement details. Please try again.
       </div>
     );
   }

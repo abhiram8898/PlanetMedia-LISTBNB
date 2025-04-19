@@ -27,7 +27,7 @@ interface Product {
 
 const AdsListing: React.FC<TabProps> = ({ setTab, setEdit, setId, tab }) => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage?.getItem("user") || "{}");
+  const user = localStorage?.getItem("user");
 
   const {
     data: productsListing,
@@ -36,11 +36,10 @@ const AdsListing: React.FC<TabProps> = ({ setTab, setEdit, setId, tab }) => {
   } = useQuery<Product[]>({
     queryKey: ["allAdvertisements"],
     queryFn: getAllAdvertisementsDetails,
-    enabled: Boolean(user),
   });
 
   const filteredProductListing = productsListing?.filter(
-    (product) => product.owner.id === user
+    (product) => product.owner.id == user
   );
 
   const handleDeleteAd = async (id: string) => {

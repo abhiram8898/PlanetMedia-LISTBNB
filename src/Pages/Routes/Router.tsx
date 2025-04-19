@@ -24,17 +24,14 @@ const RoutesHandler = () => {
     <Router>
       <Routes>
         {/* Public routes */}
-        <Route element={<PublicAuthProvider />} errorElement={<ErrorPage />}>
+        <Route element={<PublicAuthProvider />}>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/product-details/:id" element={<ProductDetails />} />
         </Route>
 
         {/* Private routes */}
-        <Route
-          element={<PrivateAuthProvider loginStatus={true} />}
-          errorElement={<ErrorPage />}
-        >
+        <Route element={<PrivateAuthProvider loginStatus={true} />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/edit-ad/:id" element={<EditAdWrapper />} />
         </Route>

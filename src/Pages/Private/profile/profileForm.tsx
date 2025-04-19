@@ -25,10 +25,9 @@ interface CustomerData {
 
 const ProfileForm = () => {
   const queryClient = useQueryClient();
-  const user = JSON.parse(localStorage?.getItem("user") ?? "{}");
+
   const customerData = queryClient.getQueryData<CustomerData>([
     "customerDetailsKey",
-    user,
   ]);
 
   const { mutate: updateProfile } = useMutation({

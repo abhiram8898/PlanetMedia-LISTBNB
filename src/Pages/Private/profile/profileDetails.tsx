@@ -25,10 +25,8 @@ interface TabProps {
 }
 
 const ProfileDetails: React.FC<TabProps> = ({ setTab, setEdit, setId }) => {
-  const user = JSON.parse(localStorage?.getItem("user") || "{}");
-
   const { data: customerData, isLoading } = useQuery<CustomerData>({
-    queryKey: ["customerDetailsKey", user],
+    queryKey: ["customerDetailsKey"],
     queryFn: () => getCustomerDetails(),
   });
 

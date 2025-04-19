@@ -3,17 +3,20 @@ import Layout from "../../../Components/Layout/layout";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
+export interface AuthRouteProps {
+  loginStatus: boolean;
+}
+
 const PublicAuthProvider = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-  const isLoginPage = window.location.pathname === "/login";
 
   useEffect(() => {
-    if (token && isLoginPage) {
-      navigate("/");
-      toast.error("You are already logged in, please logout to login again.");
+    const token = localStorage.getItem("token");
+    if (window.location.pathname === "/login" && token) {
+      toast.info("You are already logged in. Please logout first.");
+      navigate("/", { replace: true });
     }
-  }, [token, navigate, isLoginPage]);
+  }, [navigate]);
 
   return (
     <Layout>
