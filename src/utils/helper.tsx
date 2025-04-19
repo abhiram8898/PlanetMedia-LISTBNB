@@ -1,18 +1,5 @@
 import { toast } from "react-toastify";
 
-const AuthChecker = (
-  navigate: (path: string, options?: { replace?: boolean }) => void,
-  token: string | null,
-  loginStatus: boolean
-): void => {
-  // For private routes (loginStatus = true)
-  if (loginStatus && !token) {
-    toast.error("Please login to access this page");
-    navigate("/login", { replace: true });
-    return;
-  }
-};
-
 const handleApiError = (error: {
   response?: { status: number; data?: { message?: string } };
 }) => {
@@ -36,4 +23,4 @@ const handleLogout = (
   navigate("/", { replace: true });
 };
 
-export { AuthChecker, handleApiError, handleLogout };
+export { handleApiError, handleLogout };

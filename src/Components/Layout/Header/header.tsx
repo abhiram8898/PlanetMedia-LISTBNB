@@ -6,6 +6,7 @@ const Header = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
   const navigate = useNavigate();
+
   return (
     <header className="flex justify-between items-center my-4 py-4 px-4 md:px-16 shadow-lg bg-white w-full">
       <img
@@ -37,13 +38,13 @@ const Header = () => {
           )}
         </div>
 
-        <button
+        <Link
+          to={"/profile"}
           className="cursor-pointer rounded-full bg-[#F50963] text-white px-4 md:px-8 py-2 font-semibold text-sm"
-          onClick={() => navigate("/profile")}
           aria-label="Post new advertisement"
         >
           Post Your Ad
-        </button>
+        </Link>
       </nav>
     </header>
   );

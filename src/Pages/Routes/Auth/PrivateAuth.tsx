@@ -1,18 +1,28 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { AuthChecker } from "../../../utils/helper";
+import { useEffect, useState } from "react";
 import Layout from "../../../Components/Layout/layout";
+import { toast } from "react-toastify";
 
 export interface AuthRouteProps {
   loginStatus: boolean;
 }
+
 const PrivateAuthProvider = ({ loginStatus }: AuthRouteProps) => {
-  const authentification = localStorage?.getItem("token");
   const navigate = useNavigate();
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
-    AuthChecker(navigate, authentification, loginStatus);
-  }, [loginStatus, authentification, navigate]);
+    const token = localStorage?.getItem("token");
+
+    if (!token && loginStatus) {
+      toast.error("Please login to access this page");
+      navigate("/login", { replace: true });
+    } else {
+      setCheckingAuth(false);
+    }
+  }, [navigate, loginStatus]);
+
+  if (checkingAuth) return null;
 
   return (
     <Layout>

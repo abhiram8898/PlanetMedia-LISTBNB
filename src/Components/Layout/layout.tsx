@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           key={location.pathname}
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
           className="max-w-[1586px] mx-4 md:mx-16 flex-grow"
           aria-label={`Page content for ${location.pathname}`}
         >
